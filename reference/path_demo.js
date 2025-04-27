@@ -14,3 +14,4 @@ console.log(path.parse(__filename).base);
 
 // concatenate paths
 console.log(path.join(__dirname, 'test', 'hello.html'));
+
