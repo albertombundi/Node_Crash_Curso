@@ -1,8 +1,17 @@
 {
     "cSpell.words": [
-        "Mbundi"
+        "analisar",
+        "Compartilhamento",
+        "Informações",
+        "Mbundi",
+        "órgãos",
+        "Recursos",
+        "servidor",
+        "solicitação"
     ],
     "commentTranslate.targetLanguage": "pt",
     "editor.wordWrap": "on",
-    "files.autoSave": "afterDelay"
+    "files.autoSave": "afterDelay",
+    "commentTranslate.source": "Google",
+    "commentTranslate.hover.enabled": true
 }
