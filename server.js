@@ -77,7 +77,7 @@ router.post('/accounts', (req, res) => {  // Rota para criar uma nova conta
     const account = {
         user: body.user,
         currency: body.currency, 
-        description: body.description || `${body.user}'s account`,
+        description: body.description || `Conta do ${body.user}`,
         balance: balance || 0,
         transactions: []
     };
