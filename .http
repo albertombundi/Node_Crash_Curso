@@ -1,1 +1,8 @@
-GET http://localhost:5000/api/accounts/roberto
+POST  http://localhost:5000/api/accounts
+Content-Type: application/json
+
+{
+    "user": "steve",
+    "currency": "USD",
+    "balance": 100
+}
