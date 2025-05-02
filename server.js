@@ -17,11 +17,11 @@ app.use(cors({ origin: /http:\/\/localhost/ }));    // Ative os CORs para solici
 
 const db = {   // Banco de dados simples na memória para fins de demonstração
     'roberto': {     // Usuário de exemplo
-        'usuário': 'roberto',  
-        'moeda': 'EURO', 
-        'balanço': 100,
-        'descrição': 'Uma conta simples',
-        'transações': []
+        'user': 'roberto',  
+        'currency': 'USD', 
+        'balance': 100,
+        'description': 'Uma conta simples',
+        'transactions': []
     }
 }
 
@@ -90,7 +90,55 @@ router.post('/accounts', (req, res) => {  // Rota para criar uma nova conta
             .json(account); 
     
 });
-// Registre todas as nossas rotas
+
+router.put('/accounts/:user', (req, res) => {
+    const body = req.body;  // Obtém o corpo da solicitação
+    const user = req.params.user;  // Obtém o nome de usuário dos parâmetros da solicitação
+    const account = db[user];  // Procura o usuário no banco de dados
+
+    if (!account) {
+        return res
+                .status(404)
+                .json({error: 'O usuário não existe'});  // Retorna erro 404 se a conta não for encontrada
+    }
+
+    // Validando apenas certos items editáveis
+    if (body.user || body.balance || body.transactions) {
+        return res
+                .status(400)
+                .json({error: 'Apenas a descrição e a moeda podem ser editadas'});  // Retorna erro 400 se os campos editáveis não forem válidos
+    }
+
+    if (body.description) {
+        account.description = body.description;  // Atualiza a descrição da conta
+    }
+    if (body.currency) {
+        account.currency = body.currency;  // Atualiza a moeda da conta
+    }
+    
+    return res
+        .status(201)
+        .json(account);
+
+
+});
+
+router.delete('/accounts/:user', (req, res) => {  // Rota para excluir uma conta
+    const user = req.params.user;  // Obtém o nome de usuário dos parâmetros da solicitação
+    const account = db[user];  // Procura o usuário no banco de dados
+
+    if (!account) {
+        return res
+                .status(404)
+                .json({error: 'O usuário não existe'});  // Retorna erro 404 se a conta não for encontrada
+    }
+
+    delete db[user];  // Exclui a conta do banco de dados
+    return res.status(204).send();  // Retorna status 204 sem conteúdo
+});
+
+
+// Registrar todas as nossas rotas
 app.use(apiRoot, router);   //  Usa o roteador para todas as rotas sob api-root
 
 app.listen(port, () => {    // Inicia o servidor e ouve a porta especificada
