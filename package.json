@@ -1,10 +1,11 @@
 {
   "name": "node_crash_curso",
   "version": "1.0.0",
-  "description": "Meu servidor Node.js do node crash curso",
+  "description": "Node crash curso",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
